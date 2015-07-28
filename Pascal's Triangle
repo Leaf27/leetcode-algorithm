@@ -1,0 +1,15 @@
+public class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<Integer> content=new ArrayList<Integer>();
+        List<List<Integer>> triangle=new ArrayList<List<Integer>>();
+            for(int i=0;i<numRows;i++){
+                content.add(0,1);
+                for(int j=1;j<content.size()-1;j++){
+                    content.set(j,content.get(j+1)+content.get(j));
+                }
+                triangle.add(new ArrayList<Integer>(content));
+            }
+            return triangle;
+        
+    }
+}
