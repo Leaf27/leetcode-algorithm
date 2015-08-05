@@ -1,0 +1,45 @@
+public class Solution {
+    public void sortColors(int[] nums) {
+             int firstOne=0;
+             int lastOne=nums.length-1;
+             int current=0;
+             while(current<=lastOne){
+                 if(nums[firstOne]!=1||nums[lastOne]!=1){
+                     if(nums[firstOne]==0){
+                         firstOne++;
+                     }
+                     else if(nums[lastOne]==2) lastOne--;
+                     else if(nums[firstOne]==1&&nums[lastOne]==0) {
+                         exchange(nums,firstOne,lastOne);
+                         firstOne++;
+                     }
+                     else if(nums[firstOne]==2&&nums[lastOne]==0){
+                         exchange(nums,firstOne,lastOne);
+                         firstOne++;
+                         lastOne--;
+                     }
+                     else if(nums[firstOne]==2&&nums[lastOne]==1){
+                            exchange(nums,firstOne, lastOne);
+                            lastOne--;
+                     }
+                     current=firstOne+1;
+                 }
+                 else{
+                     if(nums[current]==0){
+                         exchange(nums,firstOne, current);
+                         firstOne++;
+                     }
+                     else if(nums[current]==2){
+                         exchange(nums,lastOne, current);
+                         lastOne--;
+                     }
+                     current++;
+                 }
+             }
+    }
+    private void exchange(int[] nums, int a, int b){
+        int temp=nums[a];
+        nums[a]=nums[b];
+        nums[b]=temp;
+    }
+}
