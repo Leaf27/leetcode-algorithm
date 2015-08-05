@@ -1,0 +1,13 @@
+public class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] result=new int[n][n];
+        int count=1;
+        for(int i=0;count<=n*n;i++){
+            for(int j=i;j<n-i&&count<=n*n;j++,count++) result[i][j]=count;
+            for(int j=i+1;j<n-1-i&&count<=n*n;j++,count++) result[j][n-i-1]=count;
+            for(int j=n-1-i;j>=i&&count<=n*n;j--,count++) result[n-i-1][j]=count;
+            for(int j=n-2-i;j>=i+1&&count<=n*n;j--,count++) result[j][i]=count;
+        }
+        return result;
+    }
+}
