@@ -1,0 +1,42 @@
+public class Solution {
+    
+    public void nextPermutation(int[] nums) {
+       int number=checkDesc(nums);
+       if(nums.length==0||nums.length==1) return;
+       else{
+           if(number==0) reverse(nums,0,nums.length-1);
+           else {
+               int next=nextGreat(nums,number,nums.length-1,nums[number-1]);
+               exchange(nums,next,number-1);
+               reverse(nums,number,nums.length-1);
+                }
+           }
+    }
+    private void reverse(int[] nums, int a, int b){
+        for(int i=a,j=b;i<j;i++,j--) exchange(nums, i,j);
+    }
+   
+    private void exchange(int[] nums, int a, int b){
+        int temp=nums[a];
+            nums[a]=nums[b];
+            nums[b]=temp;
+    }
+    
+    private int nextGreat(int[] nums, int first, int last, int target){
+        while(first<last){
+            int mid=first+(last-first)/2+1;
+            if(nums[mid]>target) first=mid;
+            else last=mid-1;
+        }
+        return first;
+    }
+    
+    private int checkDesc(int[] nums){
+        int i=nums.length-1;
+        for(;i>0;){
+            if(nums[i-1]>=nums[i]) i--;
+            else break;
+        }
+        return i;
+    }
+}
