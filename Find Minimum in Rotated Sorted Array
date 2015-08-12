@@ -1,0 +1,15 @@
+public class Solution {
+    public int findMin(int[] nums) {
+        return finder(nums, 0,nums.length-1);
+    }
+    private int finder(int[] A, int begin, int end){
+        if(begin==end) return A[begin];
+        else if(begin==end-1) return(A[begin]<A[end])? A[begin]:A[end];
+        else {
+            int m=begin+(end-begin)/2;
+            if(A[begin]>A[m]) return finder(A, begin, m);
+            else if(A[m]>A[end]) return finder(A,m+1, end);
+            else return(A[begin]<A[m])? A[begin]:A[m];
+        }
+    }
+}
