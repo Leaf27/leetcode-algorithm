@@ -1,0 +1,25 @@
+public class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        Set singleSet=new HashSet();
+        for(int i=0;i<9;i++){
+            if(!valid(board, 0,i,8,i,singleSet)) return false;
+            if(!valid(board, i,0,i,8,singleSet)) return false;
+        }
+        
+        for(int i=0;i<9;i=i+3){
+            for(int j=0;j<9;j=j+3){
+                if(!valid(board,i,j,i+2,j+2,singleSet)) return false;
+            }
+        }
+        return true;
+    }
+    private boolean valid(char[][] board, int xBegin, int yBegin, int xEnd, int yEnd, Set singleSet){
+        for(int i=xBegin; i<=xEnd;i++){
+            for(int j=yBegin;j<=yEnd;j++){
+                if(board[i][j]!='.') if(!singleSet.add(board[i][j])) return false; 
+            }
+        }
+        singleSet.clear();
+        return true;
+    }
+}
