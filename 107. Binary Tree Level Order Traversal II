@@ -1,3 +1,4 @@
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -13,14 +14,16 @@ class Solution(object):
         """
         result = []
         self.add_level(root, 0, result)
+        if result:
+            result.reverse()
         return result
         
     def add_level(self, root, level, result):
         if not root:
             return
         elif len(result)<=level:
-            result.insert(0,[root.val])
-        else: result[len(result)-level-1].append(root.val)
+            result.append([root.val])
+        else: result[level].append(root.val)
         
         self.add_level(root.left, level+1,result)
         self.add_level(root.right,level+1,result)
