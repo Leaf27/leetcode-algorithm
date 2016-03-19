@@ -1,0 +1,26 @@
+class Solution(object):
+    def permuteUnique(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        number_dict = {}
+        for number in nums:
+            number_dict[number]=number_dict.get(number,0)+1
+        result=[]
+        one=[]
+        self.getPermu(number_dict, one, result)
+        return result
+
+    def getPermu(self, number_dict, onePermu,result):
+        if not number_dict:
+            result.append(onePermu)
+        else:
+            for element in number_dict:
+                current_list = list(onePermu)
+                current_dict=number_dict.copy()
+                current_list.append(element)
+                current_dict[element]=current_dict.get(element)-1
+                if(current_dict[element]==0):
+                    del current_dict[element]
+                self.getPermu(current_dict,current_list,result)
