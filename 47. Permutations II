@@ -24,3 +24,31 @@ class Solution(object):
                 if(current_dict[element]==0):
                     del current_dict[element]
                 self.getPermu(current_dict,current_list,result)
+                
+                
+                
+class Solution(object):
+    def permuteUnique(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        res = []
+        nums.sort()
+        if(len(nums)==1 or len(nums)==0):
+            return [nums]
+
+        while(True):
+            res.append(nums)
+            nums=list(nums)
+            start= len(nums)-1
+            while(start>0 and nums[start-1]>=nums[start]):
+               start=start-1
+               if(start==0):
+                   return res
+            start=start-1
+            end = len(nums)-1
+            while(nums[end]<=nums[start]):
+               end=end-1
+            nums[start],nums[end]=nums[end],nums[start]
+            nums[start+1:]=sorted(nums[start+1:])
