@@ -52,3 +52,15 @@ class Solution(object):
                end=end-1
             nums[start],nums[end]=nums[end],nums[start]
             nums[start+1:]=sorted(nums[start+1:])
+            
+def permuteUnique(nums):
+        ret = [[]]
+        for n in nums:
+            temp = []
+            for item in ret:
+                for i in xrange(len(item) + 1):
+                    temp += item[:i] + [n] + item[i:],
+                    if i < len(item) and item[i] == n:
+                        break
+            ret = temp
+        return ret if any(ret) else []
