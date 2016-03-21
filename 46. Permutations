@@ -1,0 +1,15 @@
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        result = [[]]
+        for number in nums:
+            new_perm = []
+            for perm in result:
+                for i in range(len(perm)+1):
+                    new_perm.append(perm[:i]+[number]+perm[i:])
+
+            result=new_perm
+        return result
