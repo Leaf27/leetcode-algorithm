@@ -1,0 +1,22 @@
+class Solution(object):
+    def isHappy(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        def sum_of_square(n):
+            res=0
+            while(n>0):
+                res+=pow(n%10,2)
+                n=int(n/10)
+            return res
+            
+        nums=set()
+        current = n
+        while(current!=1):
+            current = sum_of_square(current)
+            if(current not in nums):
+                 nums.add(current)
+            else:
+                return False
+        return True
