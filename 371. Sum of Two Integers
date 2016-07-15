@@ -1,0 +1,14 @@
+public class Solution {
+    public int getSum(int a, int b) {
+        if(a==0||b==0){
+            return a^b;
+        }
+        else
+        {
+            return getSum(a^b,(a&b)<<1);
+        }
+    }
+}
+// bit manipulation 
+// a^b:Sum of bits of x and y where at least one of the bits is not set
+// (a&b)<<1: carry now contains common set bits of x and y
