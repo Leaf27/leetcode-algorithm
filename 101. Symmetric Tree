@@ -24,3 +24,49 @@ class Solution(object):
             return True
         else:
             return Symmetric(root.left,root.right)
+            
+            
+# iteritive
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        stack=list()
+        if root==None:
+            return True
+        else:
+            if bool(root.left)!=bool(root.right):
+                return False
+            elif root.left==None and root.right==None:
+                return True
+            stack.append(root.left)
+            stack.append(root.right)
+            while stack:
+                right=stack.pop()
+                left=stack.pop()
+                if(right.val!=left.val):
+                    return False
+                if left.left!=None:
+                    if right.right==None:
+                        return False
+                    stack.append(left.left)
+                    stack.append(right.right)
+                elif right.right!=None:
+                    return False
+                
+                if right.left!=None:
+                    if left.right==None:
+                        return False
+                    stack.append(left.right)
+                    stack.append(right.left)
+                elif left.right!=None:
+                    return False
+            return True
