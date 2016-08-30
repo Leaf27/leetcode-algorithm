@@ -1,0 +1,14 @@
+class Solution(object):
+    def firstUniqChar(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        s_set=dict()
+        for char in s:
+            s_set[char]=s_set.get(char,0)+1
+        for index in range(len(s)):
+            if(s_set[s[index]]==1):
+                return index
+        return -1
+            
