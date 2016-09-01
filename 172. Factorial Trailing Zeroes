@@ -1,0 +1,12 @@
+class Solution(object):
+    def trailingZeroes(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        i=1
+        sum=0
+        while n/pow(5,i)>=1:
+            sum=sum+int(n/pow(5,i))
+            i=i+1
+        return sum
