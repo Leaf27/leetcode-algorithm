@@ -1,0 +1,48 @@
+class Queue(object):
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.new = list()
+        self.old=list()
+        
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: nothing
+        """
+        self.new.append(x)
+        
+
+    def pop(self):
+        """
+        :rtype: nothing
+        """
+        if self.empty():
+            return None
+        self.swift()   
+        return self.old.pop()
+                
+        
+
+    def peek(self):
+        """
+        :rtype: int
+        """
+        if self.empty():
+            return None
+        self.swift()
+        return self.old[-1]
+        
+
+    def empty(self):
+        """
+        :rtype: bool
+        """
+        return len(self.new)==0 and len(self.old)==0
+        
+    def swift(self):
+         if len(self.old)==0:
+            while len(self.new)!=0:
+                self.old.append(self.new.pop())
