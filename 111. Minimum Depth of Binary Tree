@@ -1,0 +1,14 @@
+class Solution(object):
+    local_min = float('inf')
+    def minDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+        left,right = self.minDepth(root.left), self.minDepth(root.right)
+        if left==0 or right==0:
+            return left+right+1
+        else:
+            return min(left,right)+1
