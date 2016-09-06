@@ -19,3 +19,31 @@ class Solution(object):
             if char in s_set:
                 cow=cow+min(g_set[char],s_set[char])
         return str(bull)+'A'+str(cow)+'B'
+
+
+// The idea is to iterate over the numbers in secret and in guess and count all bulls right away. 
+//For cows maintain an array that stores count of the number appearances in secret and in guess. 
+//Increment cows when either number from secret was already seen in guest or vice versa.       
+        class Solution(object):
+    def getHint(self, secret, guess):
+        """
+        :type secret: str
+        :type guess: str
+        :rtype: str
+        """
+        count=[0]*10
+        bull=0
+        cow=0
+        for index in range(len(secret)):
+            s=int(secret[index])
+            g=int(guess[index])
+            if s==g:
+                bull=bull+1
+            else:
+                if(count[g]>0):
+                    cow=cow+1
+                if(count[s]<0):
+                    cow=cow+1
+                count[g]=count[g]-1
+                count[s]=count[s]+1
+        return str(bull)+'A'+str(cow)+'B'
