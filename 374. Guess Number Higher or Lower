@@ -1,0 +1,19 @@
+
+class Solution(object):
+    def guessNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        small=1
+        large=n
+        while small<=large:
+            mid=(small+large)/2
+            result=guess(mid)
+            if result<0:
+                large=mid-1
+            elif result>0:
+                small=mid+1
+            else:
+                return mid
+                
