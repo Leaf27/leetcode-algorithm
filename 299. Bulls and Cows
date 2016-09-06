@@ -1,0 +1,21 @@
+class Solution(object):
+    def getHint(self, secret, guess):
+        """
+        :type secret: str
+        :type guess: str
+        :rtype: str
+        """
+        s_set = dict()
+        g_set=dict()
+        bull=0
+        cow=0
+        for index in range(len(secret)):
+            if secret[index]==guess[index]:
+                bull=bull+1
+            else:
+                s_set[secret[index]]=s_set.get(secret[index],0)+1
+                g_set[guess[index]]=g_set.get(guess[index],0)+1
+        for char in g_set:
+            if char in s_set:
+                cow=cow+min(g_set[char],s_set[char])
+        return str(bull)+'A'+str(cow)+'B'
