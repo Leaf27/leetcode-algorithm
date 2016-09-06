@@ -1,0 +1,44 @@
+// use hashmap
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        s_dict = dict()
+        t_dict=dict()
+        for index in range(len(s)):
+            s_current=s[index]
+            t_current=t[index]
+            if s_current in s_dict:
+                if t_current!=s_dict.get(s_current):
+                    return False
+            else:
+                s_dict[s_current]=t_current
+            
+            if t_current in t_dict:
+                if s_current!=t_dict.get(t_current):
+                    return False
+            else:
+                t_dict[t_current]=s_current
+            return True
+            
+  // The main idea is to store the last seen positions of current (i-th) characters in both strings. 
+  //If previously stored positions are different then we know that the fact they're occuring in the current i-th position simultaneously 
+  //is a mistake. We could use a map for storing but as we deal with chars which are basically ints and can be used as indices we 
+  //can do the whole thing with an array.          
+  class Solution(object):
+    def isIsomorphic(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        s_prev,t_prev= [0]*256,[0]*256
+        for i in range(len(s)):
+            if s_prev[ord(s[i])]!=t_prev[ord(t[i])]:
+                return False
+            s_prev[ord(s[i])]=i+1
+            t_prev[ord(t[i])]=i+1
+        return True
