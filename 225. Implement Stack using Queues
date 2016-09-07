@@ -1,0 +1,46 @@
+class Stack(object):
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.old=list()
+        self.new=list()
+        
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: nothing
+        """
+        self.new.append(x)
+        
+    def swift(self):
+        del self.old[:]
+        while len(self.new)>1:
+            self.old.append(self.new.pop(0))
+        self.new,self.old=self.old,self.new
+        
+    def pop(self):
+        """
+        :rtype: nothing
+        """
+        self.swift()
+        self.old.pop(0)
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        self.swift()
+        x = self.old[0]
+        self.new.append(x)
+        return x
+
+    def empty(self):
+        """
+        :rtype: bool
+        """
+        return len(self.old)+len(self.new)==0
+    
+ 
+        
+        
