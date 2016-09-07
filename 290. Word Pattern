@@ -1,0 +1,17 @@
+class Solution(object):
+    def wordPattern(self, pattern, str):
+        """
+        :type pattern: str
+        :type str: str
+        :rtype: bool
+        """
+        a_list=str.split(' ')
+        if len(a_list)!=len(pattern):
+            return False
+        pos=dict()
+        for i in range(len(pattern)):
+            if pos.get(ord(pattern[i]),i)!=pos.get(a_list[i],i):
+                return False
+            pos[ord(pattern[i])]=i
+            pos[a_list[i]]=i
+        return True
