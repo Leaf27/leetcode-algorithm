@@ -1,0 +1,40 @@
+// recursive
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        dummp=ListNode(0)
+        dummp.next=head
+        def getNth(head,index,n,length):
+            if not head:
+                return index
+            if length<0:
+                length = getNth(head.next,index+1,n,length)
+            if index == length-n-1:
+                head.next=head.next.next
+            return length
+        
+        getNth(dummp,0,n,-1)
+        return dummp.next
+        
+  // two points
+  class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        dummp=ListNode(0)
+        dummp.next=head
+        slow,fast=dummp, dummp
+        for index in range(n):
+            fast=fast.next
+        while fast.next:
+            slow=slow.next
+            fast=fast.next
+        slow.next=slow.next.next
+        return dummp.next
