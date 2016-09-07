@@ -6,9 +6,8 @@ class Solution(object):
         """
         s_list=list()
         pair={'(':')','{':'}','[':']'}
-        right=[')','}',']']
         for char in s:
-            if char not in right:
+            if char in pair:
                 s_list.append(char)
             else:
                 if len(s_list)<=0 or char !=pair.get(s_list.pop()):
