@@ -1,0 +1,34 @@
+// recursive
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def isPalindrome(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        if head ==None or head.next==None:
+            return True
+            
+        slow=fast=head
+        while fast:
+            try:
+                slow=slow.next
+                fast=fast.next.next
+            except:
+                break
+            
+        def compare(first,second):
+            if second and second.next:
+                first  =  compare(first,second.next)
+            if first and first.val==second.val:
+                first=first.next
+                return first
+            return None
+
+            
+        return bool(compare(head,slow))
