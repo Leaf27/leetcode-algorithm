@@ -1,0 +1,18 @@
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        two_indices=[]
+        a_set=set()
+        for i in range(len(nums)):
+            if (target-nums[i]) in a_set:
+                two_indices.append(i)
+                two_indices.append(nums.index(target-nums[i]))
+                break
+            else:
+                a_set.add(nums[i])
+        return two_indices
