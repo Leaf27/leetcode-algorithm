@@ -12,3 +12,24 @@ class Solution(object):
             if status[i]:
                 status[i*i:n:i]=[False]*len(status[i*i:n:i])
         return sum(status)
+        
+class Solution(object):
+    def countPrimes(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n<2:
+            return 0
+        status=[1]*n
+        status[0]=status[1]=0
+        i=2
+        while i*i<n:
+            while status[i]!=1:
+                i+=1
+            j=i*i
+            while j<n:
+                status[j]=0
+                j=j+i
+            i=i+1
+        return sum(status)
