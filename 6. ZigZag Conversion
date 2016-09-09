@@ -1,0 +1,28 @@
+Create nRows StringBuffers, and keep collecting characters from original string to corresponding StringBuffer. 
+//Just take care of your index to keep them in bound.
+
+class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        i=0
+        result=['']*numRows
+        if numRows==1:
+            return s
+        while i<len(s):
+            for j in range(numRows):
+                if i<len(s):
+                    result[j]+=(s[i])
+                    i+=1
+                else:
+                    break
+            for j in range(numRows-2,0,-1):
+                if i<len(s):
+                    result[j]+=(s[i])
+                    i+=1
+                else:
+                    break
+        return ''.join(result)
