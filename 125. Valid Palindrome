@@ -1,0 +1,26 @@
+class Solution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        def alphanumeric(s):
+            code=ord(s)
+            return (code>=48 and code<=57) or (code>=97 and code<=122)
+            
+        s1=s.lower()
+        i,j=0,len(s)-1
+        while i<j:
+            if not alphanumeric(s1[i]):
+                i+=1
+            elif not alphanumeric(s1[j]):
+                j-=1
+            else:
+                if s1[i]!=s1[j]:
+                    return False
+                i+=1
+                j-=1
+        return True
+        
+        
+        
