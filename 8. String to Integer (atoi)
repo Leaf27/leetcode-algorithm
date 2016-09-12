@@ -1,0 +1,38 @@
+class Solution(object):
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        result=0
+        sign=1
+        before=True
+        for i in range(len(str)):
+            current=str[i]
+            if before and current==' ':
+                continue
+            elif before:
+                if current=='-':
+                    sign=-1
+                elif current=='+':
+                    sign=1
+                elif ord(current)>=ord('0') and ord(current)<=ord('9'):
+                    result=result*10+ord(current)-ord('0')
+                else:
+                    return 0
+                before=False
+            else:
+                if ord(current)>=ord('0') and ord(current)<=ord('9'):
+                    result=result*10+ord(current)-ord('0')
+                else:
+                    break
+        result=sign*result
+        if result>2147483647:
+            return 2147483647
+        elif result<-2147483648:
+            return -2147483648
+        else:
+            return result
+                    
+            
+        
