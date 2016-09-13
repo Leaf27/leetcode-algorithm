@@ -1,19 +1,12 @@
-public class Solution {
-    public int maxProfit(int[] prices) {
-        if(prices.length<=1) return 0;
-        int min=prices[0],allProfit=0,localP=0;
-        for(int i=0;i<prices.length;i++){
-            min=Math.min(min, prices[i]);
-            if(min!=prices[i]) {
-                localP=Math.max(localP, prices[i]-min);
-                if(i==prices.length-1||prices[i+1]<prices[i]){
-                    allProfit+=localP;
-                    min=prices[i];
-                    localP=0;
-                }
-        }
-    }
-    return allProfit;
-}
-    
-}
+class Solution(object):
+    def maxProfit(self, prices):
+        if len(prices)==0:
+            return 0
+        local_min=prices[0]
+        profit=0
+        for i in range(1,len(prices)):
+            if prices[i]<prices[i-1]:
+                profit+=prices[i-1]-local_min
+                local_min=prices[i]
+        profit+=prices[-1]-local_min
+        return profit
