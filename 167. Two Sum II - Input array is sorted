@@ -1,0 +1,42 @@
+// binary seach O(nlgn)
+class Solution(object):
+    def twoSum(self, numbers, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        def find_target(numbers,start,end,target):
+            while start<=end:
+                mid=(start+end)/2
+                if numbers[mid]==target:
+                    return mid
+                elif numbers[mid]>target:
+                    end=mid-1
+                else:
+                    start=mid+1
+            return -1
+            
+        for i in range(len(numbers)):
+            second=find_target(numbers,i+1,len(numbers)-1,target-numbers[i])
+            if second!=-1:
+                return [i+1,second+1]
+                
+  // O(n)
+  class Solution(object):
+    def twoSum(self, numbers, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        start=0
+        end=len(numbers)-1
+        while start<end:
+            comp=numbers[start]+numbers[end]
+            if comp==target:
+                return [start+1,end+1]
+            elif comp>target:
+                end-=1
+            else:
+                start+=1
