@@ -1,0 +1,18 @@
+class Solution(object):
+    def maxRotateFunction(self, A):
+        """
+        :type A: List[int]
+        :rtype: int
+        """
+        maxi=float('-inf')
+        init=0
+        sum=0
+        if len(A)==0:
+            return 0
+        for i in range(len(A)):
+            init+=i*A[i]
+            sum+=A[i]
+        for i in range(len(A)-1,-1,-1):
+            maxi=max(maxi,init)
+            init=init+sum-len(A)*A[i]
+        return maxi
