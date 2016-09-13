@@ -1,0 +1,14 @@
+class Solution(object):
+    def integerReplacement(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        def replace(n,count):
+            if n==1:
+                return count
+            elif n%2==0:
+                return replace(n/2,count+1)
+            else:
+                return min(replace(n+1,count+1),replace(n-1,count+1))
+        return replace(n,0)
