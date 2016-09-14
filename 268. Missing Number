@@ -1,0 +1,13 @@
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        idea=0
+        actual=0
+        for num in range(len(nums)+1):
+            idea^=num
+        for num in nums:
+            actual^=num
+        return actual^idea
