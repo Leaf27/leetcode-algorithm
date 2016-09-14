@@ -1,0 +1,15 @@
+// recursive
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        result=[]
+        def travel(root,result):
+            if root:
+                travel(root.left,result)
+                result.append(root.val)
+                travel(root.right,result)
+        travel(root,result)
+        return result
