@@ -1,0 +1,11 @@
+class Solution(object):
+    def integerBreak(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        result=[0,0,1,2,4,6,9]
+        if n<=6:
+            return result[n]
+        else:
+            return 3*self.integerBreak(n-3)
