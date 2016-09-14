@@ -1,0 +1,15 @@
+class Solution(object):
+    def countNumbersWithUniqueDigits(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        result=1
+        prev_sum=9
+        for i in range(n):
+            if i<10:
+                result+=prev_sum
+                prev_sum*=9-i
+            else:
+                break
+        return result
