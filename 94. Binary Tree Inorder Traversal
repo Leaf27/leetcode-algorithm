@@ -13,3 +13,21 @@ class Solution(object):
                 travel(root.right,result)
         travel(root,result)
         return result
+
+// itertive
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        result=[]
+        stack=[]
+        while root or len(stack)>0:
+            while root:
+                stack.append(root)
+                root=root.left
+            root=stack.pop()
+            result.append(root.val)
+            root=root.right
+        return result
