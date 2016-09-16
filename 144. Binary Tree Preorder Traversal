@@ -1,0 +1,34 @@
+// recursive
+class Solution(object):
+    def preorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        def getNode(root,result):
+            if root:
+                result.append(root.val)
+                getNode(root.left,result)
+                getNode(root.right,result)
+                
+        result=[]
+        getNode(root,result)
+        return result
+        
+  // itertive
+  class Solution(object):
+    def preorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        result=[]
+        stack=list()
+        while root or len(stack)>0:
+            while root:
+                result.append(root.val)
+                stack.append(root)
+                root=root.left
+            root=stack.pop()
+            root=root.right
+        return result
