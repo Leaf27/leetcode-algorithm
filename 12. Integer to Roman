@@ -1,0 +1,26 @@
+class Solution(object):
+    def intToRoman(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        table={1:'I',5:'V',10:'X',50:'L',100:'C',500:'D',1000:'M'}
+        result=''
+        def convert(num,digit,result):
+            add=''
+            if num<4:
+                add=num*table.get(digit)
+            elif num==4:
+                add=table.get(digit)+table.get(5*digit)
+            elif num>=5 and num <9:
+                add=table.get(5*digit)+table.get(digit)*(num-5)
+            else:
+                add=table.get(digit)+table.get(digit*10)
+            return add+result
+        digit=1
+        while num>0:
+            res=num%10
+            result=convert(res,digit,result)
+            num=num/10
+            digit*=10
+        return result
