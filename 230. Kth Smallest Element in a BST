@@ -24,4 +24,28 @@ class Solution(object):
             return 0
         else:
             return 1+self.getNumber(root.left)+self.getNumber(root.right)
+            
+// in-order travesal itertive
+
+class Solution(object):
+    def kthSmallest(self, root, k):
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: int
+        """
+        stack=list()
+        index=0
+        res=None
+        while root or len(stack)>0:
+            while root:
+                stack.append(root)
+                root=root.left
+            root=stack.pop()
+            index+=1
+            if index==k:
+                res=root
+                break
+            root=root.right
+        return res.val
         
