@@ -1,0 +1,34 @@
+// recursive find
+class Solution(object):
+    def readBinaryWatch(self, num):
+        """
+        :type num: int
+        :rtype: List[str]
+        """
+        res=[]
+        options=['1','2','4','8','01','02','04','08','16','32']
+        def getNext(hour,minute,num,options,res):
+            if num!=0:
+                for i in range(len(options)):
+                    if len(options[i])==2:
+                        getNext(hour,minute+int(options[i]),num-1,options[i+1:],res)
+                    else:
+                        getNext(hour+int(options[i]),minute,num-1,options[i+1:],res)
+            else:
+                if hour>=0 and hour<=11 and minute>=0 and minute<=59:
+                   res.append('%d:%02d'%(hour,minute))
+        getNext(0,0,num,options,res)
+        return res
+//Just go through the possible times and collect those with the correct number of one-bits.        
+  class Solution(object):
+    def readBinaryWatch(self, num):
+        """
+        :type num: int
+        :rtype: List[str]
+        """
+        res=[]
+        for hour in range(12):
+            for minute in range(60):
+                if (bin(hour)+bin(minute)).count('1')==num:
+                    res.append('%d:%02d'%(hour,minute))
+        return res
