@@ -1,0 +1,21 @@
+def combinationSum3(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        option=list(range(1,10))
+        res=[]
+        def next(k,n,current,option,res):
+            if k==0 and n==0:
+                res.append(current)
+            elif k>0 and n>0:
+                for i in range(len(option)):
+                    if option[i]>n:
+                        break
+                    else:
+                        copy_current=current[:]
+                        copy_current.append(option[i])
+                        next(k-1,n-option[i],copy_current,option[i+1:],res)
+        next(k,n,[],option,res)
+        return res
