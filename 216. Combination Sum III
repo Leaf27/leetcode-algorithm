@@ -19,3 +19,26 @@ def combinationSum3(self, k, n):
                         next(k-1,n-option[i],copy_current,option[i+1:],res)
         next(k,n,[],option,res)
         return res
+        
+// backtracking
+class Solution(object):
+    def combinationSum3(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        res=[]
+        def next(k,n,current,start,res):
+            if k==0 and n==0:
+                res.append(current[:])
+            elif k>0 and n>0:
+                for i in range(start,10):
+                    if i>n:
+                        break
+                    else:
+                        current.append(i)
+                        next(k-1,n-i,current,i+1,res)
+                        current.pop()
+        next(k,n,[],1,res)
+        return res
