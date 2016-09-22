@@ -1,0 +1,32 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+//If we were able to maintain the information about the two scenarios for each tree root, let's see how it plays out. 
+//Redefine rob(root) as a new function which will return an array of two elements, the first element of which denotes the 
+//maximum amount of money that can be robbed if "root" is not robbed, while the second element signifies the maximum amount of money 
+//robbed if root is robbed.
+Let's relate rob(root) to rob(root.left) and rob(root.right), etc. For the 1st element of rob(root), we only need to sum up 
+//the larger elements of rob(root.left) and rob(root.right), respectively, since root is not robbed and we are free to rob the 
+//left and right subtrees. For the 2nd element of rob(root), however, we only need to add up the 1st elements of rob(root.left) 
+//and rob(root.right), respectively, plus the value robbed from "root" itself, since in this case it's guaranteed that we cannot rob 
+//the nodes of root.left and root.right.
+
+    def rob(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        def rob2(root):
+            res=[0]*2
+            if not root:
+                return res
+            left=rob2(root.left)
+            right=rob2(root.right)
+            res[0]+=root.val+left[1]+right[1]
+            res[1]+=max(left)+max(right)
+            return res
+        return max(rob2(root))
