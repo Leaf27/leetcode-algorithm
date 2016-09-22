@@ -1,0 +1,19 @@
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        res=[]
+        def next(left,right,current,res):
+            if left==0 and right==0:
+                res.append(current)
+            else:
+                if left==right:
+                    next(left-1,right,current+'(',res)
+                if left<right:
+                    if left>0:
+                        next(left-1,right,current+'(',res)
+                    next(left,right-1,current+')',res)
+        next(n,n,'',res)
+        return res
