@@ -1,0 +1,15 @@
+class Solution(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        one,two=0,0
+        mask=0
+        for num in nums:
+            two^=one&num
+            one=one^num
+            mask=~(one&two)
+            one&=mask
+            two&=mask
+        return one|two
