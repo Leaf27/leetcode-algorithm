@@ -1,0 +1,43 @@
+class Solution(object):
+    def diffWaysToCompute(self, input):
+        """
+        :type input: str
+        :rtype: List[int]
+        """
+        comb_res=dict()
+        def compute(input,comb_res):
+            res=[]
+            for i in range(len(input)):
+                char=input[i]
+                if char in '+-*':
+                    str1=input[:i]
+                    str2=input[i+1:]
+                    if str1 in comb_res:
+                        res1=comb_res.get(str1)
+                    else:
+                        res1=compute(str1,comb_res)
+                        
+                    
+                    if str2 in comb_res:
+                        res2=comb_res.get(str2)
+                    else:
+                        res2=compute(str2,comb_res)
+                    
+                    for first in res1:
+                        for second in res2:
+                            if char=='+':
+                                current=first+second
+                            elif char=='-':
+                                current=first-second
+                            else:
+                                current=first*second
+                            res.append(current)
+            if len(res)==0:
+                res.append(int(input))
+            comb_res[input]=res
+            return res
+        return compute(input,comb_res)
+                
+                    
+                
+        
