@@ -1,0 +1,21 @@
+class Solution(object):
+    def decodeString(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        stack=[['',1]]
+        num=''
+        str=''
+        for char in s:
+            if char.isdigit():
+                num+=char
+            elif char=='[':
+                stack.append(['',int(num)])
+                num=''
+            elif char==']':
+                st,t=stack.pop()
+                stack[-1][0]+=st*t
+            else:
+                stack[-1][0]+=char
+        return stack[0][0]
