@@ -1,0 +1,12 @@
+// best strategy, worst lucky
+class Solution(object):
+    def getMoneyAmount(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        res=[[0]*(n+1) for _ in range(n+1)]
+        for lo in range(n,0,-1):
+            for hi in range(lo+1,n+1):
+                res[lo][hi]=min(x+max(res[lo][x-1],res[x+1][hi]) for x in range(lo,hi))
+        return res[1][n]
