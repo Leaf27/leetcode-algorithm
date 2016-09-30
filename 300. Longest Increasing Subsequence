@@ -1,0 +1,17 @@
+class Solution(object):
+    def lengthOfLIS(self, nums):
+        tails=list()
+        for num in nums:
+            if len(tails)==0 or num >tails[-1]:
+                tails.append(num)
+            else:
+                start=0
+                end=len(tails)-1
+                while start<end:
+                    mid=int((start+end)/2)
+                    if num>tails[mid]:
+                        start=mid+1
+                    else:
+                        end=mid
+                tails[end]=num
+        return len(tails)
