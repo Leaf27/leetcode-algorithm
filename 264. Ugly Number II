@@ -1,0 +1,13 @@
+import heapq
+class Solution(object):
+    res=list()
+    min_heap=[1]
+    def nthUglyNumber(self, n):
+        while len(self.res)<n:
+            current=heapq.heappop(self.min_heap)
+            if len(self.res)==0 or current>self.res[-1]:
+                self.res.append(current)
+                heapq.heappush(self.min_heap,current*2)
+                heapq.heappush(self.min_heap,current*3)
+                heapq.heappush(self.min_heap,current*5)
+        return self.res[n-1]
