@@ -1,0 +1,28 @@
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        def rob_all(nums,start,end,money):
+            no=rob=money
+            while start<=end:
+                pre_no=no
+                no=max(no,rob)
+                rob=pre_no+nums[start]
+                start+=1
+            return max(no,rob)
+            
+        def rob_first(nums):
+            money=nums[0]
+            return rob_all(nums,2,len(nums)-2,money)
+        def rob_no_first(nums):
+            money=0
+            return rob_all(nums,1,len(nums)-1,money)
+            
+        return max(rob_first(nums),rob_no_first(nums))
+            
+                
+        
