@@ -1,0 +1,13 @@
+class Solution(object):
+    def maxProduct(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        local_maxi=nums[0]
+        local_mini=nums[0]
+        maxi=nums[0]
+        for i in range(1,len(nums)):
+            local_maxi,local_mini=max([local_maxi*nums[i],local_mini*nums[i],nums[i]]),min([local_maxi*nums[i],local_mini*nums[i],nums[i]])
+            maxi=max(local_maxi,maxi)
+        return maxi
