@@ -1,0 +1,14 @@
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        count=[0]*(ord('z')-ord('A')+1)
+        for char in s:
+            count[ord(char)-ord('A')]=(count[ord(char)-ord('A')]+1)%2
+        count_odd=sum(count)
+        if count_odd==0:
+            return len(s)
+        else:
+            return len(s)-(count_odd-1)
