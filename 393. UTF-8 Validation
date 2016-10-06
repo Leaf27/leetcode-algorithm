@@ -1,0 +1,27 @@
+class Solution(object):
+    def validUtf8(self, data):
+        """
+        :type data: List[int]
+        :rtype: bool
+        """
+        i=0
+        while i <len(data):
+            head=data[i]
+            head1=0
+            while head&128>0:
+                head=head<<1
+                head1+=1
+            if head1 not in [0,2,3,4] or i+head1>len(data):
+                return False
+            for num in data[i+1:i+head1]:
+                num=num>>6
+                if num!=2:
+                    return False
+            if head1==0:
+                i=i+1
+            else:
+                i=i+head1
+        return True
+                
+                
+        
