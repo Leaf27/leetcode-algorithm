@@ -1,0 +1,11 @@
+class Solution(object):
+    def rangeBitwiseAnd(self, m, n):
+        """
+        :type m: int
+        :type n: int
+        :rtype: int
+        """
+        while n&(n-1)>m:
+            n=n&(n-1)
+        return m&n
+        
