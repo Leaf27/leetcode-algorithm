@@ -1,0 +1,25 @@
+class Solution(object):
+    def toHex(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        if num==0:
+            return '0'
+            
+        convert=dict()
+        res=''
+        for i in range(16):
+            if i<10:
+                convert[i]=str(i)
+            else:
+                convert[i]=chr(i-10+ord('a'))
+                
+        if num<0:
+            num=num+pow(2,32)
+            
+        while num !=0:
+            left=num%16
+            res=convert[left]+res
+            num=num>>4
+        return res
