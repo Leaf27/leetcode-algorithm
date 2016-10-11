@@ -1,0 +1,26 @@
+class Solution(object):
+    def addStrings(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        carry=0
+        sum=''
+        if len(num1)>=len(num2):
+            longs,short=num1,num2
+        else:
+            longs,short=num2,num1
+        short='0'*(len(longs)-len(short))+short
+        for i in range(len(longs)-1,-1,-1):
+            current=int(longs[i])+int(short[i])+carry
+            if current>=10:
+                carry,current=1,current-10
+            else:
+                carry=0
+            sum=str(current)+sum
+        if carry==1:
+            return '1'+sum
+        else:
+            return sum
+        
