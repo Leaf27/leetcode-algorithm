@@ -1,0 +1,22 @@
+class Solution(object):
+    comb={'2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'}
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        def combinations(digits,res):
+            if len(digits)==0:
+                return res
+            else:
+                new=list()
+                for char in self.comb[digits[0]]:
+                    if not res:
+                        new.append(char)
+                    else:
+                        for stri in res:
+                            new.append(stri+char)
+                return combinations(digits[1:],new)
+        return combinations(digits,[])
+            
+        
