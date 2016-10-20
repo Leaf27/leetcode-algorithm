@@ -1,0 +1,17 @@
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        groups=dict()
+        for string in strs:
+            count=[0]*26
+            for char in string:
+                count[ord(char)-ord('a')]+=1
+            rep=reduce(lambda x,y:str(x)+str(y),count)
+            if rep not in groups:
+                groups[rep]=list()
+            groups[rep].append(string)
+        return list(groups.values())
+        
