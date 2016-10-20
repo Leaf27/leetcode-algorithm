@@ -1,3 +1,4 @@
+
 class Solution(object):
     def groupAnagrams(self, strs):
         """
@@ -13,5 +14,20 @@ class Solution(object):
             if rep not in groups:
                 groups[rep]=list()
             groups[rep].append(string)
+        return list(groups.values())
+        
+//sort  letters in  string                      
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        groups=dict()
+        for string in strs:
+            sort=''.join(sorted(string))
+            if sort not in groups:
+                groups[sort]=list()
+            groups[sort].append(string)
         return list(groups.values())
         
