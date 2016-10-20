@@ -1,0 +1,21 @@
+class Solution(object):
+    def simplifyPath(self, path):
+        """
+        :type path: str
+        :rtype: str
+        """
+        pieces=path.split('/')
+        stack=list()
+        for piece in pieces:
+            if piece=='' or piece=='.':
+                continue
+            elif piece=='..':
+                if len(stack)>0:
+                    stack.pop()
+            else:
+                stack.append(piece)
+        res='/'.join(stack)
+        return '/'+res
+                
+        
+        
