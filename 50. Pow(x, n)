@@ -1,0 +1,48 @@
+class Solution(object):
+    def myPow(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        if n==0:
+            return 1
+        if n<0:
+            x,n=1/x,abs(n)
+        half=self.myPow(x,int(n/2))
+        if n%2==0:
+            return half*half
+        else:
+            return half*half*x
+            
+// memorize
+class Solution(object):
+    def myPow(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        if n<0:
+            x=1/x
+            n=abs(n)
+        res=[[0,1],[1,x]]
+        i=2
+        while i<n:
+            res.append([i,res[-1][1]*res[-1][1]])
+            i=i<<1
+        left,result=n,1
+        end=len(res)-1
+        while left>0:
+            if left>=res[end][0]:
+                result*=res[end][1]
+                left-=res[end][0]
+            else:
+                end-=1
+        return result
+        
+            
+        
+        
+            
+        
