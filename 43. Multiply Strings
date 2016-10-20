@@ -1,0 +1,33 @@
+class Solution(object):
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        res=[0]*(len(num1)+len(num2))
+        if len(num1)==0 or len(num2)==0:
+            return '0'
+        for i in range(len(num1)-1,-1,-1):
+            for j in range(len(num2)-1,-1,-1):
+                current=int(num1[i])*int(num2[j])
+                sum=current+res[i+j+1]
+                res[i+j]+=int(sum/10)
+                res[j+i+1]=sum%10
+        str_res=reduce(lambda x,y:str(x)+str(y),res)
+        i=0
+        while i<len(str_res)-1:
+            if str_res[i]=='0':
+                i+=1
+            else:
+                break
+        return str_res[i:]
+        
+    
+                
+                
+                
+                
+                
+            
+        
