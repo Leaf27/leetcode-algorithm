@@ -1,0 +1,26 @@
+class Solution(object):
+    def getPermutation(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: str
+        """
+        nums=[1]
+        component=[1]
+        for i in range(2,n):
+            nums.append(nums[-1]*i)
+            component.append(i)
+        if len(component)<n:
+            component.append(n)
+        res=''
+        while len(component)>1:
+            current=(k-1)/nums[len(nums)-1]
+            k=k-current*nums[len(nums)-1]
+            res+=str(component[current])
+            component.remove(component[current])
+            nums=nums[:len(nums)-1]
+        return res+str(component[0])
+        
+        
+            
+        
