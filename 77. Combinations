@@ -1,0 +1,24 @@
+// dfs
+public class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new ArrayList<>();
+        recursion(1, n, k, new ArrayList<>(), result);
+        return result;
+    }
+    
+    private void recursion(int start, int end, int k, List<Integer> cur, List<List<Integer>> result)
+    {
+        if (k < 0) return;
+        if (k == 0)
+        {
+            result.add(cur);
+        }
+        
+        for (int i = start; i <= end; i++)
+        {
+            List<Integer> copy=new ArrayList<Integer>(cur);
+            copy.add(i);
+            recursion(i + 1, end, k - 1, copy, result);
+        }
+    }
+}
