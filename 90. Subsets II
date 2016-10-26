@@ -1,0 +1,32 @@
+public class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> res=new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i=0;i<=nums.length;i++)    subsets_with_length(nums,i,res);
+        return res;
+    }
+    
+    private void subsets_with_length(int[] nums,int length,List<List<Integer>> res)
+    {
+        List<Integer> current=new ArrayList<>();
+        get_subsets(nums, 0, length,res,current);
+    }
+    
+    private void get_subsets(int[] nums, int start, int length,List<List<Integer>> res,List<Integer> current)
+    {
+        if (current.size()==length) res.add(new ArrayList<>(current));
+        else if (current.size() >length) return;
+        else
+        {
+            for (int i=start;i<nums.length;i++)
+            {
+                if (i== start || nums[i]!=nums[i-1])
+                {
+                    current.add(nums[i]);
+                    get_subsets(nums,i+1,length,res,current);
+                    current.remove(current.size()-1);
+                }
+            }
+        }
+    }
+}
