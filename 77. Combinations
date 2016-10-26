@@ -8,17 +8,16 @@ public class Solution {
     
     private void recursion(int start, int end, int k, List<Integer> cur, List<List<Integer>> result)
     {
-        if (k < 0) return;
-        if (k == 0)
+        if (k==0) result.add(new ArrayList<>(cur));
+        else if(k<0) return;
+        else
         {
-            result.add(cur);
-        }
-        
-        for (int i = start; i <= end; i++)
-        {
-            List<Integer> copy=new ArrayList<Integer>(cur);
-            copy.add(i);
-            recursion(i + 1, end, k - 1, copy, result);
+            for(int i=start;i<=end;i++)
+            {
+                cur.add(i);
+                recursion(i+1, end, k-1, cur, result);
+                cur.remove(cur.size()-1);
+            }
         }
     }
 }
