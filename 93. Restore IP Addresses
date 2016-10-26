@@ -1,0 +1,31 @@
+public class Solution {
+    public List<String> restoreIpAddresses(String s) {
+        List<String> res=new ArrayList<>();
+        List<String> each = new ArrayList<>();
+        backTracking(s,0,res,each);
+        return res;
+    }
+    
+    private void backTracking(String s, int start, List<String> res, List<String> each)
+    {
+        if (start==s.length() && each.size()==4)    res.add(String.join(".",each));
+        else if (start<s.length() && each.size()<4)
+        {
+            for (int length=1;length<=3 && start+length<=s.length();length++)
+            {   
+                if(length==1 || s.charAt(start)!='0')
+                {
+                    String piece=s.substring(start,start+length);
+                    int pieceInt=Integer.parseInt(piece);
+                    if (pieceInt>=0 && pieceInt<=255)
+                    {
+                        each.add(piece);
+                        backTracking(s, start+length, res, each);
+                        each.remove(each.size()-1);
+                    }
+                }
+                
+            }
+        }
+    }
+}
