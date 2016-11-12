@@ -1,0 +1,45 @@
+public class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> res = new ArrayList<>();
+        List<String> each = new ArrayList<>();
+        dfs(s, 0, res, each);
+        return res;
+    }
+    
+    private void dfs(String s, int start, List<List<String>> res, List<String> each)
+    {
+        if (start == s.length()) res.add(new ArrayList(each));
+        else
+        {
+            int index = start;
+            while(index<s.length())
+            {
+                index = s.indexOf(s.charAt(start),index);
+                if(index == -1) return;
+                String add = s.substring(start,index+1);
+                if(isPalindorm(add))
+                {
+                    each.add(add);
+                    dfs(s, index+1,res,each);
+                    each.remove(each.size()-1);
+                }
+                index=index+1;      
+            }
+        }
+    }
+    
+    private boolean isPalindorm(String s)
+    {
+        int start = 0, end = s.length()-1;
+        while( start < end )
+        {
+            if (s.charAt(start) != s.charAt(end)) return false;
+            else
+            {
+                start++;
+                end--;
+            }
+        }
+        return true;
+    }
+}
