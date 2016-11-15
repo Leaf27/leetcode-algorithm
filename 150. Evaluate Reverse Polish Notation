@@ -1,0 +1,22 @@
+public class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for(String s : tokens)
+        {
+            try{
+                int number = Integer.parseInt(s);
+                stack.push(number);
+            }
+            catch(Exception ex)
+            {
+                int second = stack.pop();
+                int first = stack.pop();
+                if(s.equals("+")) stack.push(second+first);
+                else if(s.equals("-")) stack.push(first-second);
+                else if(s.equals("*")) stack.push(first*second);
+                else if(s.equals("/")) stack.push(first/second);
+            }
+        }
+        return stack.pop();
+    }
+}
