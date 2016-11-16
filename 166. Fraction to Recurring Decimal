@@ -1,0 +1,34 @@
+public class Solution {
+    public String fractionToDecimal(int numerator, int denominator) {
+        if(numerator==0) return "0";
+        Map<Long, Integer> map = new HashMap<>();
+        List<String> result = new ArrayList<>();
+        if((numerator>0)^(denominator>0)) result.add("-");
+        long num = Math.abs((long)numerator);
+        long den = Math.abs((long)denominator);
+        long beforePoint = num/den;
+        long remain = num%den;
+        String before = String.valueOf(beforePoint);
+        for(char chr : before.toCharArray()){
+            result.add(Character.toString(chr));
+        }
+        if(remain!=0) 
+        {
+            result.add(".");
+            while(remain!=0 && !map.containsKey(remain))
+            {
+                long add = remain*10/den;
+                result.add(String.valueOf(add));
+                map.put(remain, result.size()-1);
+                remain = (remain*10)%den;
+            }
+            if(remain!=0)
+            {
+                int location=map.get(remain);
+                result.add(location, "(");
+                result.add(")");
+            }
+        }
+        return String.join("",result);
+    }
+}
