@@ -1,0 +1,63 @@
+public class Solution {
+    public int numIslands(char[][] grid) {
+        if(grid.length==0 || grid[0].length==0) return 0;
+        int width = grid[0].length;
+        int length = grid.length;
+        unionFind nf = new unionFind(width*length+1);
+        for(int i = 0;i<length;i++)
+        {
+            for(int j=0;j<width;j++)
+            {
+                if(grid[i][j]=='1')
+                {
+                    if(i+1<length && grid[i+1][j]=='1') nf.union(i*width+j,(i+1)*width+j);
+                    if(j+1<width && grid[i][j+1]=='1') nf.union(i*width+j,i*width+j+1);
+                }
+                else
+                {
+                    nf.union(i*width+j,width*length);
+                }
+            }
+        }
+        return nf.groups();
+    }
+    
+    public class unionFind
+    {
+        int[] parents;
+        public unionFind(int length)
+        {
+            parents = new int[length];
+            for(int i = 0; i<parents.length;i++) parents[i]=i;
+        }
+        
+        public void union(int a, int b)
+        {
+            int rootA = find(a);
+            int rootB = find(b);
+            parents[rootA]=rootB;
+        }
+        
+        public int find(int root)
+        {
+            while(parents[root]!=root)
+            {
+                parents[root] = parents[parents[root]];
+                root=parents[root];
+            }
+            return root;
+        }
+        
+        public boolean isConnected(int a, int b)
+        {
+            return find(a)==find(b);
+        }
+        
+        public int groups()
+        {
+            int count  = 0;
+            for( int i=0;i<parents.length-1;i++) if(parents[i]==i) count++;
+            return count;
+        }
+    }
+}
