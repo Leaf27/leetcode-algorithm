@@ -1,0 +1,13 @@
+public class Solution {
+    public int thirdMax(int[] nums) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(nums.length,Collections.reverseOrder());
+        for(int num: nums) maxHeap.add(num);
+        List<Integer> maxs = new ArrayList<>();
+        while(maxHeap.size()>0 && maxs.size()<3)
+        {
+            int current = maxHeap.poll();
+            if(maxs.size()==0 || current!=maxs.get(maxs.size()-1)) maxs.add(current);
+        }
+        return (maxs.size()>=3)? maxs.get(maxs.size()-1):maxs.get(0);
+    }
+}
