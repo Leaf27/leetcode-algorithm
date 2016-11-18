@@ -1,0 +1,7 @@
+public class Solution {
+    public int arrangeCoins(int n) {
+        int upper = (int) Math.sqrt((double)n*2);
+        while(upper*(upper+1)>2*n) upper--;
+        return upper;
+    }
+}
