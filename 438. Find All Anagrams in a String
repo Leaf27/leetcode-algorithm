@@ -1,0 +1,23 @@
+public class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+       if(p==null || p.length()==0 || s==null || s.length()==0) return result;
+       int left = 0,right = 0, count=p.length();
+       int[] hash = new int[256];
+       for(char chr : p.toCharArray()) hash[chr]++;
+       while(right<s.length())
+       {
+           if(hash[s.charAt(right)]>=1) count--;
+           hash[s.charAt(right)]--;
+           right++;
+           if(count==0) result.add(left);
+           if(right-left==p.length())
+           {
+               if(hash[s.charAt(left)]>=0) count++;
+               hash[s.charAt(left)]++;
+               left++;
+           }
+       }
+       return result;
+    }
+}
