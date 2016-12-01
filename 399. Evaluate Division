@@ -1,0 +1,63 @@
+public class Solution {
+    Map<String, Node> all;
+    public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
+        all = new HashMap<>();
+        for(int i =0;i<equations.length; i++)
+        {
+            String[] s = equations[i];
+            Node left = all.getOrDefault(s[0],new Node(s[0]));
+            all.put(s[0],left);
+            Node right = all.getOrDefault(s[1],new Node(s[1]));
+            all.put(s[1],right);
+            left.AddNeighbor(right, values[i]);
+            right.AddNeighbor(left, 1/values[i]);
+        }
+        
+        double[] res = new double[queries.length];
+        
+        for(int i =0 ; i<queries.length ; i++)
+        {
+            String[] s = queries[i];
+            if(s[0].equals(s[1])) res[i]=1;
+            Node left = all.getOrDefault(s[0],null);
+            Node right = all.getOrDefault(s[1],null);
+            else res[i]= compute(left, right, 1.0 , new HashSet<Node>());
+        }
+        return res;
+    }
+    
+    public double compute(Node left, Node right, double res, Set<Node> visited)
+    {
+        if(left == null || right == null) return -1.0;
+        if(left == right) return res;
+        visited.add(left);
+        for( int i = 0 ; i< left.neighbors.size(); i++)
+        {
+            Node next = left.neighbors.get(i);
+            if(!visited.contains(next)){
+                visited.add(next);
+                double onepath = compute(left.neighbors.get(i), right, res*left.rates.get(i),visited);
+                if(onepath!=-1) return onepath;
+            }
+        }
+        return -1.0;
+    }
+
+    public class Node
+    {
+        String label;
+        List<Double> rates;
+        List<Node> neighbors;
+        
+        public Node(String label) {
+            this.label = label;
+            rates = new ArrayList<>();
+            neighbors = new ArrayList<>();
+        }
+        
+        public void AddNeighbor(Node nei, double rate)  {
+            neighbors.add(nei);
+            rates.add(rate);
+        }
+    }
+}
