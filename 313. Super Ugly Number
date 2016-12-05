@@ -1,0 +1,21 @@
+public class Solution {
+    public int nthSuperUglyNumber(int n, int[] primes) {
+        List<Integer> res = new ArrayList<>();
+        int[] index = new int[primes.length];
+        res.add(1);
+        for(int i = 1; i<n;i++)
+        {
+            int min = Integer.MAX_VALUE;
+            for(int j = 0; j<index.length;j++)
+            {
+                min = Math.min(min, res.get(index[j])*primes[j]);
+            }
+            for(int j = 0; j<index.length; j++)
+            {
+                if(min == res.get(index[j])*primes[j]) index[j]++;
+            }
+            res.add(min);
+        }
+        return res.get(n-1);
+    }
+}
