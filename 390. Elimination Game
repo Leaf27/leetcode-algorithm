@@ -1,0 +1,14 @@
+public class Solution {
+    public int lastRemaining(int n) {
+        int[] record= new int[]{1,0,n};
+        boolean left = true;
+        while(record[2]>1)
+        {
+            if(!left && record[2]%2==0) record[1]-=record[0];
+            record[0]*=2;
+            record[2]/=2;
+            left = !left;
+        }
+        return record[0]+record[1];
+    }
+}
