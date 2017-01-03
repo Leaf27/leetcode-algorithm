@@ -1,0 +1,15 @@
+public class Solution {
+    public int findRadius(int[] houses, int[] heaters) {
+        int radius = 0;
+        int heaterIndex = 0;
+        Arrays.sort(houses);
+        Arrays.sort(heaters);
+        for(int house : houses)
+        {
+            while(heaterIndex<heaters.length-1 && house>=heaters[heaterIndex+1] ) heaterIndex++;
+            int new_radius= Math.min(Math.abs(heaters[heaterIndex]-house), (heaterIndex+1<heaters.length)? Math.abs(heaters[heaterIndex+1]-house): Integer.MAX_VALUE);
+            radius = Math.max(radius, new_radius);
+        }
+        return radius;
+    }
+}
