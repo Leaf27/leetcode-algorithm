@@ -1,0 +1,34 @@
+public class Solution {
+    public String frequencySort(String s) {
+        CharAndFreq[] frequencies = new CharAndFreq[256];
+        
+        for(int i= 0; i<frequencies.length ; i++) frequencies[i]= new CharAndFreq((char)i, 0);
+        
+        for(char chr: s.toCharArray()) frequencies[(int)chr].frequency++;
+        
+        Arrays.sort(frequencies, new Comparator<CharAndFreq>(){
+            public int compare(CharAndFreq cf1, CharAndFreq cf2)
+            {
+                return Integer.compare(cf2.frequency, cf1.frequency);
+            }
+        });
+        
+        StringBuilder sb = new StringBuilder();
+        for(CharAndFreq cf : frequencies)
+        {
+            for(int i = 0 ; i< cf.frequency; i++) sb.append(String.valueOf(cf.chr));
+        }
+        return sb.toString();
+        
+    }
+    private class CharAndFreq
+    {
+        public char chr;
+        public int frequency;
+        public CharAndFreq(char chr, int frequency)
+        {
+            this.chr = chr;
+            this.frequency = frequency;
+        }
+    }
+}
