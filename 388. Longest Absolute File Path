@@ -1,0 +1,19 @@
+public class Solution {
+    public int lengthLongestPath(String input) {
+        if(input == null || input.length() == 0) return 0;
+        
+        String[] pieces = input.split("\n");
+        int[] lengths = new int[pieces.length];
+        
+        int maxLen = 0;
+        
+        for(String piece : pieces)
+        {
+            int index = piece.lastIndexOf("\t")+1;
+            lengths[index] = ((index==0)?0:lengths[index-1])+piece.length()-index+1;
+            if(piece.contains(".")) maxLen = Math.max(maxLen, lengths[index]-1);
+        }
+        
+        return maxLen;
+    }
+}
