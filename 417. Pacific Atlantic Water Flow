@@ -1,0 +1,66 @@
+public class Solution {
+    int length= 0;
+    int width = 0;
+    int[][] dir = null;
+    public List<int[]> pacificAtlantic(int[][] matrix) {
+        List<int[]> res = new ArrayList<>();
+        if(matrix==null || matrix.length == 0) return res;
+        
+        length = matrix.length;
+        width = matrix[0].length;
+        dir = new int[][]{{0,1},{0,-1},{-1, 0}, {1,0}};
+        boolean[][] pa = new boolean[length][width];
+        boolean[][] at = new boolean[length][width];
+        Queue<int[]> pq = new LinkedList<>();
+        Queue<int[]> aq = new LinkedList<>();
+        
+        initiate(pa, at, pq, aq);
+        dfs(matrix, pa, pq);
+        dfs(matrix, at, aq);
+        
+        for(int i = 0; i<length ; i++)
+        {
+            for(int j = 0; j<width ; j++)
+            {
+                if(pa[i][j]&&at[i][j]) res.add(new int[]{i,j});
+            }
+        }
+        return res;
+    }
+    
+    private void initiate(boolean[][] pa, boolean[][] at, Queue<int[]> pq, Queue<int[]> aq)
+    {
+        for(int i = 0 ; i<length ; i++)
+        {
+            pa[i][0] = true;
+            pq.offer(new int[]{i, 0});
+            at[i][width-1] = true;
+            aq.offer(new int[]{i, width-1});
+            
+        }
+            
+        for(int j = 0; j<width ; j++)
+        {
+            pa[0][j] = true;
+            pq.offer(new int[]{0,j});
+            at[length-1][j] = true;
+            aq.offer(new int[]{length-1, j});
+        }           
+    }
+    
+    private void dfs(int[][] matrix, boolean[][] visited, Queue<int[]> queue)
+    {
+        while(!queue.isEmpty())
+        {
+            int[] cur = queue.poll();
+            for(int[] oneDir : dir)
+            {
+                int x = cur[0]+oneDir[0];
+                int y = cur[1]+oneDir[1];
+                if(x<0 || x>=length || y<0 || y>=width || visited[x][y] || matrix[x][y]<matrix[cur[0]][cur[1]] ) continue;
+                visited[x][y]=true;
+                queue.offer(new int[]{x,y});
+            }
+        }
+    }
+}
