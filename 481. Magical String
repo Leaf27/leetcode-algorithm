@@ -1,0 +1,29 @@
+public class Solution {
+    List<Integer> string = null;
+    int ci = 3;
+    public int magicalString(int n) {
+        
+        if(string==null)
+        {
+            string = new ArrayList<>();
+            string.add(0);
+            string.add(1);
+            string.add(2);
+            string.add(2);
+        }
+        
+        while(string.size()<=n+1)
+        {
+            int next = (string.get(string.size()-1)==1)?2:1;
+            string.add(next);
+            if(string.get(ci)==2) string.add(next);
+            ci++;
+        }
+        
+        int res = 0;
+        for(int i = 1; i<=n ; i++){
+             if(string.get(i)==1) res++;
+        }
+          return res; 
+    }
+}
