@@ -1,0 +1,25 @@
+public class Solution {
+    static int divisor = 1337;
+    
+    public int superPow(int a, int[] b) {
+        if(a%divisor == 0) return 0;
+        if(b==null || b.length==0) return 1;
+        
+        int p = 0;
+        for(int digit : b) p=(p*10+digit)%1140;
+        
+        return getPow(a%divisor, p);
+    }
+    
+    private int getPow(int a, int b)
+    {
+        int res = 1;
+        while(b>0)
+        {
+            if(b%2==1) res = res*a%divisor;
+            a= a*a%divisor;
+            b>>=1;
+        }
+        return res;
+    }
+}
