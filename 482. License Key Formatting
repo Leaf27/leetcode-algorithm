@@ -1,0 +1,24 @@
+public class Solution {
+    public String licenseKeyFormatting(String S, int K) {
+        if(S==null) return null;
+        
+        int length = 0;
+        for(int i = 0 ; i<S.length() ; i++) if(S.charAt(i)!='-') length++;
+        
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        for(int i = 0; i<S.length() ; i++)
+        {
+            if(S.charAt(i)!='-')
+            {
+                if(count%K == length%K ) sb.append('-');
+                sb.append(Character.toUpperCase(S.charAt(i)));
+                count++;
+            }
+        }
+        
+        if(sb.length()>0 && sb.charAt(0)=='-') sb.deleteCharAt(0);
+        return sb.toString();
+    }
+    
+}
