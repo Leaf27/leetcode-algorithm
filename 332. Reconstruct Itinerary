@@ -1,0 +1,31 @@
+public class Solution {
+    public List<String> findItinerary(String[][] tickets) {
+        
+        List<String> res = new LinkedList<>();
+        
+        if(tickets == null || tickets.length==0) return res;
+        
+        Map<String, Queue<String>> map = new HashMap<>();
+        // build a map , of which the value set is sorted.
+        for(String[] ticket : tickets)
+        {
+            String dep = ticket[0];
+            String arr = ticket[1];
+            if(!map.containsKey(dep)) map.put(dep, new PriorityQueue<String>());
+            map.get(dep).add(arr);
+        }
+        
+        dfs("JFK", map, res);
+        
+        return res;
+    }
+    
+    private void dfs(String dep, Map<String, Queue<String>> map, List<String> res)
+    {
+        while(map.containsKey(dep) && map.get(dep).size()!=0)
+        {
+            dfs(map.get(dep).poll(),map,res);
+        }
+        res.add(0, dep);
+    }
+}
