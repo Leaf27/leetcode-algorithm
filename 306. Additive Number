@@ -1,0 +1,69 @@
+public class Solution {
+    public boolean isAdditiveNumber(String num) {
+        String first = "";
+        String second = "";
+        
+        for(int i = 1 ; i<num.length()/2+1 ; i++)
+        {
+        
+            for(int j = i+1 ; j<num.length() && j-i<num.length()/2+1; j++)
+            {
+                first = num.substring(0,i);
+                second = num.substring(i , j);
+                int start = j;
+                
+                // the start of second cann't be '0'
+                if(num.charAt(i)=='0' && second.length()!=1) break;
+                
+                
+                while(start<=num.length())
+                {
+                    String add = add(first, second);
+                    
+                    if(start+add.length()<=num.length())
+                    {
+                        String sub = num.substring(start, start+add.length());
+                        
+                        if(sub.equals(add))
+                        {
+                            first = second;
+                            second = add;
+                            start = start+add.length();
+                        }
+                        else break;
+                    }
+                    else 
+                    {
+                        j = num.length();
+                        break;
+                    }
+                }
+                
+                if(start == num.length())
+                {
+                    return true;
+                }
+                
+            }
+        }
+        return false;
+    }
+    
+    private String add(String s1, String s2)
+    {
+        int len1 = s1.length();
+        int len2 = s2.length();
+        int remain = 0;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1 ; len1-i>=0 || len2-i>=0 ; i++)
+        {
+            if(len1-i>=0) remain+=s1.charAt(len1-i)-'0';
+            if(len2-i>=0) remain+=s2.charAt(len2-i)-'0';
+            
+            sb.insert(0,remain%10);
+            remain = remain/10;
+        }
+        if(remain!=0) sb.insert(0,remain);
+        return sb.toString();
+    }
+}
