@@ -1,0 +1,58 @@
+// first verison by me
+public class Solution {
+
+    public String removeKdigits(String num, int k) {
+        if(k == num.length()) return "0";
+        
+        int[] locs = new int[10];
+        
+        int index = 0;
+        
+        StringBuilder sb = new StringBuilder();
+        
+        while(k>0 && index <num.length())
+        {
+            
+            // if k == num.length()-index, which means all remaining letters should be discarded.
+            if(k == num.length()-index) 
+            {
+                index=num.length();
+                break;
+            }
+            // for every cursion, reset the locs;
+            for(int i = 0 ; i<locs.length ; i++) locs[i] = -1;
+            
+            for(int i = 0 ; i<=k && i +index< num.length() ; i++)
+            {
+                char c = num.charAt(i+index);
+                if(locs[c-'0']==-1) locs[c-'0'] = i+index;
+                if(c == '0') break;
+            }
+            
+            for(int i = 0 ; i< locs.length ; i++)
+            {
+                if(locs[i]!=-1)
+                {
+                    sb.append(num.charAt(locs[i]));
+                    k -= locs[i]-index;
+                    index = locs[i]+1;
+                    break;
+                }
+            }
+        }
+
+        if(index != num.length()) sb.append(num.substring(index));
+        return cleanString(sb.toString());
+    }
+    
+    private String cleanString(String s)
+    {
+        if(s == null) return null;
+        int index = 0;
+        while(index < s.length() && s.charAt(index)=='0') index++;
+        
+        if(index == s.length()) return "0";
+        else
+             return s.substring(index);
+    }
+}
