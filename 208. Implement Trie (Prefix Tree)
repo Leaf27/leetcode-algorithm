@@ -1,0 +1,56 @@
+public class Trie {
+
+    boolean isLeaf = false;
+    Trie[] children;
+    /** Initialize your data structure here. */
+    public Trie() {
+        children = new Trie[26];
+    }
+    
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
+        Trie root = this;
+        if(word == null) return ;
+        for(int i = 0 ; i< word.length() ; i++)
+        {
+            char c = word.charAt(i);
+            if(root.children[c-'a']==null) root.children[c-'a']=new Trie();
+            root = root.children[c-'a'];
+            if(i==word.length()-1) root.isLeaf = true;
+        }
+    }
+    
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
+        if(word == null) return false;
+        Trie root = find(word);
+        return root!=null && root.isLeaf;
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
+        Trie root = find(prefix);
+        
+        return root!=null;
+    }
+    
+    private Trie find(String prefix)
+    {
+        Trie root = this;
+        for(int i = 0 ; i< prefix.length() ; i++)
+        {
+            char c = prefix.charAt(i);
+            if(root.children[c-'a']==null) return null;
+            root = root.children[c-'a'];
+        }
+        return root;
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
