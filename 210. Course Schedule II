@@ -1,0 +1,35 @@
+public class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = new ArrayList<>(numCourses);
+        int[] counts = new int[numCourses];
+        for(int i = 0 ; i<numCourses ; i++) graph.add(new ArrayList<>());
+        
+        for(int[] pre : prerequisites)
+        {
+            counts[pre[0]]++;
+            graph.get(pre[1]).add(pre[0]);
+        }
+        
+        Queue<Integer> queue = new LinkedList<>();
+        int[] res = new int[numCourses];
+        int index = 0;
+        
+        for(int i = 0; i< numCourses ; i++) if(counts[i]==0) queue.add(i);
+        
+        while(!queue.isEmpty())
+        {
+            int from = queue.poll();
+            
+            res[index++]=from;
+            
+            for(int to : graph.get(from))
+            {
+                counts[to]--;
+                if(counts[to]==0)
+                    queue.offer(to);
+            }
+        }
+        
+        return (index==numCourses)? res : new int[0];
+    }
+}
